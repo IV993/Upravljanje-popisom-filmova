@@ -3,6 +3,7 @@
 import requests
 import os
 from dotenv import load_dotenv
+from urllib.parse import quote
 
 # Učitavanje API ključa iz .env datoteke
 load_dotenv()
@@ -19,7 +20,7 @@ def fetch_movie_details(title):
     :param title: Naziv filma za koji želimo dohvatiti podatke
     :return: Objekt s podacima filma ili None ako film nije pronađen
     """
-    url = f"http://www.omdbapi.com/?t={title}&apikey={OMDB_API_KEY}"
+    url = f"http://www.omdbapi.com/?t={quote(title)}&apikey={OMDB_API_KEY}"
     response = requests.get(url)
     if response.status_code == 200:
         data = response.json()
